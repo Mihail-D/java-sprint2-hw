@@ -1,8 +1,11 @@
 public class MenuOutput {
-    public void menuPrint() {
+
+    public static void greetingsMenu() {
         System.out.println("Вас приветствует программа финансовой отчетности.");
-        System.out.println("Годовые и месячные отчеты подразделений загружены.");
-        System.out.println("Что должна сделать программа?"+"\n");
+    }
+
+    public static void menuPrint() {
+        System.out.println("Выберите Ваши дальнейшие действия." + "\n");
         System.out.println("1 - Считать все месячные отчёты.");
         System.out.println("2 - Считать годовой отчёт.");
         System.out.println("3 - Сверить отчёты.");

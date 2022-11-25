@@ -7,7 +7,8 @@ public class Main {
 
         MenuOutput menuPrint = new MenuOutput();
         ReportsReader reportsReader = new ReportsReader();
-        menuPrint.menuPrint();
+        MenuOutput.greetingsMenu();
+        MenuOutput.menuPrint();
 
         Scanner scanner = new Scanner(System.in);
 
