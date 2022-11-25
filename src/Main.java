@@ -1,10 +1,12 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         MenuOutput menuPrint = new MenuOutput();
+        ReportsReader reportsReader = new ReportsReader();
         menuPrint.menuPrint();
 
         Scanner scanner = new Scanner(System.in);
@@ -12,15 +14,14 @@ public class Main {
         while (true) {
             int item = scanner.nextInt();
             if (!menuPrint.menuValidator(item)) {
-                System.out.println("Указаны неправильные значения. Введите от 1 до 5 и 0 для выхода.");
                 continue;
             }
 
             if (item == 1) {
-                System.out.println("Считать все месячные отчёты.");
+                reportsReader.rowMonthsDataReader();
             }
             else if (item == 2) {
-                System.out.println("Считать годовой отчёт.");
+                reportsReader.rowYearDataReader();
             }
             else if (item == 3) {
                 System.out.println("Сверить отчёты.");
