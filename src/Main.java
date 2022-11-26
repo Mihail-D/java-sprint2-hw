@@ -5,8 +5,10 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        MenuOutput menuPrint = new MenuOutput();
+        MenuOutput menuPrint = new MenuOutput(); // TODO TODO TODO СДЕЛАТЬ ЭКЗЕМПЛЯРАМИ КЛАССОВ
         ReportsReader reportsReader = new ReportsReader();
+        ReportsWriter reportsWriter = new ReportsWriter();
+
         MenuOutput.greetingsMenu();
         MenuOutput.menuPrint();
 
@@ -29,6 +31,7 @@ public class Main {
                 ReportsComparator.getFineBalance();
             }
             else if (item == 4) {
+                reportsWriter.getMonthlyReports();
                 System.out.println("Вывести информацию о всех месячных отчётах.");
             }
             else if (item == 5) {
@@ -38,10 +41,7 @@ public class Main {
                 System.out.println("Выход.");
                 break;
             }
-
-
         }
     }
-
 }
 

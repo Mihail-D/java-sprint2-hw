@@ -87,7 +87,7 @@ public class ReportsReader {
         MenuOutput.menuPrint();
     }
 
-    static void getNamesChunks() {
+    void getNamesChunks() {
         int keyChunk;
         for (String i : monthFiles.keySet()) {
             keyChunk = Integer.parseInt(i.substring(i.length() - 4, i.length() - 2));
