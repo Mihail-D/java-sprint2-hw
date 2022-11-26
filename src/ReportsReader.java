@@ -27,7 +27,7 @@ public class ReportsReader {
                 int keyNamePrefix = 0;
 
                 while ((strLine = br.readLine()) != null && strLine.length() != 0) {
-                    String keyName = fileName.substring(2, fileName.length() - 4) + "_" + keyNamePrefix;
+                    String keyName = fileName.substring(6, fileName.length() - 4) + "_" + keyNamePrefix;
                     keyNamePrefix++;
 
                     if (!keyName.contains("_0")) {
@@ -35,12 +35,15 @@ public class ReportsReader {
                         monthlyReport = new MonthlyReport(fileData[0], Boolean.parseBoolean(fileData[1]),
                                 Integer.parseInt(fileData[2]), Integer.parseInt(fileData[3])
                         );
+
                         monthFiles.put(keyName, monthlyReport);
                     }
                 }
                 fis.close();
             }
         }
+        System.out.println(monthFiles); // TODO TODO TODO
+        getNamesChunks();
         System.out.println("Месячные отчёты загружены в систему и готовы к работе." + "\n");
         MenuOutput.menuPrint();
     }
@@ -80,11 +83,12 @@ public class ReportsReader {
                 fis.close();
             }
         }
+        System.out.println(yearFile); // TODO TODO TODO
         System.out.println("Годовой отчет загружен в систему и готов к работе." + "\n");
         MenuOutput.menuPrint();
     }
 
-    public void getNamesChunks() {
+      static void getNamesChunks() {
         String keyChunk;
         for (String i : monthFiles.keySet()) {
             keyChunk = i.substring(i.length() - 4, i.length() - 2);
