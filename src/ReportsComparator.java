@@ -2,27 +2,32 @@ import java.util.HashMap;
 
 public class ReportsComparator {
 
-    public static int getBalance() {
-        HashMap<String, Integer> monthsBalaceStorage = new HashMap<>();
+    public static void getRowBalance() {
+        HashMap<Integer, Integer> monthsBalanceStorage = new HashMap<>();
 
         if (ReportsReader.monthFiles.size() == 0 || ReportsReader.yearFile.size() == 0) {
             System.out.println("Месячные и годовой отчеты загружены, но не обработаны." + "/n");
             MenuOutput.menuPrint();
         }
 
-        for (String j : ReportsReader.keysChunks) {
-            monthsBalaceStorage.put(j + "_income",0);
-            monthsBalaceStorage.put(j + "_expense",0);
+        for (Integer j : ReportsReader.keysChunks) {
+            monthsBalanceStorage.put(j, 0);
+            monthsBalanceStorage.put(-j, 0);
         }
 
         for (String value : ReportsReader.monthFiles.keySet()) {
-            int valueId = Integer.parseInt(value.substring(0,2));
-            int
+            int operationsSum =
+                    ReportsReader.monthFiles.get(value).sumOfOne * ReportsReader.monthFiles.get(value).quantity;
+            int valueId = Integer.parseInt(value.substring(0, 2));
+
+            if (monthsBalanceStorage.containsKey(valueId) && ReportsReader.monthFiles.get(value).isExpense) {
+                monthsBalanceStorage.merge(-valueId, operationsSum, Integer::sum);
+            }
+            else if (monthsBalanceStorage.containsKey(valueId) && !(ReportsReader.monthFiles.get(value).isExpense)) {
+                monthsBalanceStorage.merge(valueId, operationsSum, Integer::sum);
+            }
         }
 
-        System.out.println(ReportsReader.keysChunks); // TODO TODO TODO
-        System.out.println(monthsBalaceStorage); // TODO TODO TODO
-        return 0;
     }
 
 }

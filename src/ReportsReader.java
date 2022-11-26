@@ -5,7 +5,7 @@ public class ReportsReader {
 
     public static HashMap<String, MonthlyReport> monthFiles = new HashMap<>();
     public static HashMap<String, AnnualReport> yearFile = new HashMap<>();
-    public static ArrayList<String> keysChunks = new ArrayList<>();
+    public static ArrayList<Integer> keysChunks = new ArrayList<>();
 
     public void rowMonthsDataReader() throws IOException {
         System.out.println("Считать все месячные отчёты.");  // TODO TODO TODO
@@ -42,7 +42,7 @@ public class ReportsReader {
                 fis.close();
             }
         }
-        System.out.println(monthFiles); // TODO TODO TODO
+
         getNamesChunks();
         System.out.println("Месячные отчёты загружены в систему и готовы к работе." + "\n");
         MenuOutput.menuPrint();
@@ -83,20 +83,20 @@ public class ReportsReader {
                 fis.close();
             }
         }
-        System.out.println(yearFile); // TODO TODO TODO
+
         System.out.println("Годовой отчет загружен в систему и готов к работе." + "\n");
         MenuOutput.menuPrint();
     }
 
       static void getNamesChunks() {
-        String keyChunk;
+        int keyChunk;
         for (String i : monthFiles.keySet()) {
-            keyChunk = i.substring(i.length() - 4, i.length() - 2);
+            keyChunk = Integer.parseInt(i.substring(i.length() - 4, i.length() - 2));
             if (!keysChunks.contains(keyChunk)) {
                 keysChunks.add(keyChunk);
             }
         }
-        System.out.println(keysChunks); // TODO TODO TODO
+
     }
 
 }
