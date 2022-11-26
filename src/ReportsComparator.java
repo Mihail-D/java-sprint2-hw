@@ -6,11 +6,6 @@ public class ReportsComparator {
 
     public static void getRowBalance() {
 
-        if (ReportsReader.monthFiles.size() == 0 || ReportsReader.yearFile.size() == 0) {
-            System.out.println("Месячные и годовой отчеты загружены, но не обработаны." + "\n");
-            MenuOutput.menuPrint();
-        }
-
         for (Integer j : ReportsReader.keysChunks) {
             monthsBalanceStorage.put(j, 0);
             monthsBalanceStorage.put(-j, 0);
@@ -28,7 +23,6 @@ public class ReportsComparator {
                 monthsBalanceStorage.merge(valueId, operationsSum, Integer::sum);
             }
         }
-
     }
 
     public static void getFineBalance() {
@@ -58,9 +52,14 @@ public class ReportsComparator {
             }
         }
         if (withoutDiscrepancies) {
-            System.out.println("Сверка завершена. Расхождений не обнаружено.");
+            if (ReportsReader.monthFiles.size() == 0 || ReportsReader.yearFile.size() == 0) {
+                System.out.println("Месячные и годовой отчеты загружены, но не обработаны." + "\n");
+                MenuOutput.menuPrint();
+            }
+            else {
+                System.out.println("Сверка завершена. Расхождений не обнаружено.");
+            }
         }
-        MenuOutput.menuPrint();
     }
 
     public static void getReportDiscrepancy(int month, int globalBata, int localData) {
@@ -70,7 +69,5 @@ public class ReportsComparator {
         System.out.println("Данные в отчете за месяц: " + localData + "руб.");
         System.out.println("Разница составляет: " + (globalBata > localData ? globalBata - localData :
                 localData - globalBata) + "руб.");
-
     }
-
 }
