@@ -7,7 +7,7 @@ public class ReportsComparator {
     public static void getRowBalance() {
 
         if (ReportsReader.monthFiles.size() == 0 || ReportsReader.yearFile.size() == 0) {
-            System.out.println("Месячные и годовой отчеты загружены, но не обработаны." + "/n");
+            System.out.println("Месячные и годовой отчеты загружены, но не обработаны." + "\n");
             MenuOutput.menuPrint();
         }
 
@@ -32,20 +32,45 @@ public class ReportsComparator {
     }
 
     public static void getFineBalance() {
-
+        System.out.println("Сверяю отчёты." + "\n");
+        boolean isMatches;
+        boolean withoutDiscrepancies = true;
+        int index;
         for (String item : ReportsReader.yearFile.keySet()) {
             if (ReportsReader.yearFile.get(item).isExpense) {
-                int index = ReportsReader.yearFile.get(item).month;
-                System.out.println(monthsBalanceStorage.get(-index));                                  // TODO TODO TODO
-                System.out.println(ReportsReader.yearFile.get(item).amount);                          // TODO TODO TODO
-                System.out.println(ReportsReader.yearFile.get(item).amount == monthsBalanceStorage.get(-index)); // TODO TODO TODO
+                index = ReportsReader.yearFile.get(item).month;
+                isMatches = ReportsReader.yearFile.get(item).amount == monthsBalanceStorage.get(-index);
+                if (!isMatches) {
+                    getReportDiscrepancy(index, ReportsReader.yearFile.get(item).amount,
+                            monthsBalanceStorage.get(-index)
+                    );
+                    withoutDiscrepancies = false;
+                }
             }
             else if (!(ReportsReader.yearFile.get(item).isExpense)) {
-                int index = ReportsReader.yearFile.get(item).month;
-                System.out.println(monthsBalanceStorage.get(index));                                   // TODO TODO TODO
-                System.out.println(ReportsReader.yearFile.get(item).amount);                           // TODO TODO TODO
-                System.out.println(ReportsReader.yearFile.get(item).amount == monthsBalanceStorage.get(index));  // TODO TODO TODO
+                index = ReportsReader.yearFile.get(item).month;
+                isMatches = ReportsReader.yearFile.get(item).amount == monthsBalanceStorage.get(index);
+
+                if (!isMatches) {
+                    getReportDiscrepancy(index, ReportsReader.yearFile.get(item).amount, monthsBalanceStorage.get(index));
+                    withoutDiscrepancies = false;
+                }
             }
         }
+        if (withoutDiscrepancies) {
+            System.out.println("Сверка завершена. Расхождений не обнаружено.");
+        }
+        MenuOutput.menuPrint();
     }
+
+    public static void getReportDiscrepancy(int month, int globalBata, int localData) {
+
+        System.out.println("В отчете за " + month + "-й" + " месяц обнаружено расхождение данных");
+        System.out.println("Данные в годовом отчете: " + globalBata + "руб.");
+        System.out.println("Данные в отчете за месяц: " + localData + "руб.");
+        System.out.println("Разница составляет: " + (globalBata > localData ? globalBata - localData :
+                localData - globalBata) + "руб.");
+
+    }
+
 }

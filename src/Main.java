@@ -25,7 +25,6 @@ public class Main {
                 reportsReader.rowYearDataReader();
             }
             else if (item == 3) {
-                System.out.println("Сверить отчёты.");
                 ReportsComparator.getRowBalance();
                 ReportsComparator.getFineBalance();
             }

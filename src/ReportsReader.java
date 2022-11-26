@@ -8,7 +8,7 @@ public class ReportsReader {
     public static ArrayList<Integer> keysChunks = new ArrayList<>();
 
     public void rowMonthsDataReader() throws IOException {
-        System.out.println("Считать все месячные отчёты.");  // TODO TODO TODO
+        System.out.println("Считываю все месячные отчёты." + "\n");
 
         File folder = new File("./resources");
         File[] listOfFiles = folder.listFiles();
@@ -49,7 +49,7 @@ public class ReportsReader {
     }
 
     public void rowYearDataReader() throws IOException {
-        System.out.println("Считать годовой отчёт.");            // TODO TODO TODO
+        System.out.println("Считываю годовой отчёт." + "\n");
 
         File folder = new File("./resources");
         File[] listOfFiles = folder.listFiles();
@@ -83,12 +83,11 @@ public class ReportsReader {
                 fis.close();
             }
         }
-        System.out.println(yearFile); // TODO TODO TODO
         System.out.println("Годовой отчет загружен в систему и готов к работе." + "\n");
         MenuOutput.menuPrint();
     }
 
-      static void getNamesChunks() {
+    static void getNamesChunks() {
         int keyChunk;
         for (String i : monthFiles.keySet()) {
             keyChunk = Integer.parseInt(i.substring(i.length() - 4, i.length() - 2));
