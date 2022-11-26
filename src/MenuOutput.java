@@ -1,5 +1,8 @@
 public class MenuOutput {
 
+    static String[] months = new String[]{"январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август",
+            "сентябрь", "октябрь", "ноябрь", "декабрь"};
+
     public static void greetingsMenu() {
         System.out.println("Вас приветствует программа финансовой отчетности.");
     }

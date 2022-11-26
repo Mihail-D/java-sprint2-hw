@@ -3,7 +3,6 @@ import java.util.HashMap;
 public class ReportsComparator {
 
     static HashMap<Integer, Integer> monthsBalanceStorage = new HashMap<>();
-
     public static void getRowBalance() {
 
         for (Integer j : ReportsReader.keysChunks) {
@@ -64,7 +63,8 @@ public class ReportsComparator {
 
     public static void getReportDiscrepancy(int month, int globalBata, int localData) {
 
-        System.out.println("В отчете за " + month + "-й" + " месяц обнаружено расхождение данных");
+        System.out.println("В отчетности за " + MenuOutput.months[month] + " обнаружено расхождение " +
+                "данных");
         System.out.println("Данные в годовом отчете: " + globalBata + "руб.");
         System.out.println("Данные в отчете за месяц: " + localData + "руб.");
         System.out.println("Разница составляет: " + (globalBata > localData ? globalBata - localData :
