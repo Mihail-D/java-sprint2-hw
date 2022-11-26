@@ -2,8 +2,9 @@ import java.util.HashMap;
 
 public class ReportsComparator {
 
+    static HashMap<Integer, Integer> monthsBalanceStorage = new HashMap<>();
+
     public static void getRowBalance() {
-        HashMap<Integer, Integer> monthsBalanceStorage = new HashMap<>();
 
         if (ReportsReader.monthFiles.size() == 0 || ReportsReader.yearFile.size() == 0) {
             System.out.println("Месячные и годовой отчеты загружены, но не обработаны." + "/n");
@@ -30,4 +31,21 @@ public class ReportsComparator {
 
     }
 
+    public static void getFineBalance() {
+
+        for (String item : ReportsReader.yearFile.keySet()) {
+            if (ReportsReader.yearFile.get(item).isExpense) {
+                int index = ReportsReader.yearFile.get(item).month;
+                System.out.println(monthsBalanceStorage.get(-index));                                  // TODO TODO TODO
+                System.out.println(ReportsReader.yearFile.get(item).amount);                          // TODO TODO TODO
+                System.out.println(ReportsReader.yearFile.get(item).amount == monthsBalanceStorage.get(-index)); // TODO TODO TODO
+            }
+            else if (!(ReportsReader.yearFile.get(item).isExpense)) {
+                int index = ReportsReader.yearFile.get(item).month;
+                System.out.println(monthsBalanceStorage.get(index));                                   // TODO TODO TODO
+                System.out.println(ReportsReader.yearFile.get(item).amount);                           // TODO TODO TODO
+                System.out.println(ReportsReader.yearFile.get(item).amount == monthsBalanceStorage.get(index));  // TODO TODO TODO
+            }
+        }
+    }
 }

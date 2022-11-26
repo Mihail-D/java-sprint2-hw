@@ -83,7 +83,7 @@ public class ReportsReader {
                 fis.close();
             }
         }
-
+        System.out.println(yearFile); // TODO TODO TODO
         System.out.println("Годовой отчет загружен в систему и готов к работе." + "\n");
         MenuOutput.menuPrint();
     }

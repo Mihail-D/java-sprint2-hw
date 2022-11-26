@@ -27,6 +27,7 @@ public class Main {
             else if (item == 3) {
                 System.out.println("Сверить отчёты.");
                 ReportsComparator.getRowBalance();
+                ReportsComparator.getFineBalance();
             }
             else if (item == 4) {
                 System.out.println("Вывести информацию о всех месячных отчётах.");
