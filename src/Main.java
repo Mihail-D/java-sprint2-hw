@@ -33,7 +33,7 @@ public class Main {
             }
             else if (item == 4) {
                 reportsWriter.getMostProfitableProduct();
-                //reportsWriter.getMostExpensiveProduct();
+                reportsWriter.getMostExpensiveProduct();
             }
             else if (item == 5) {
                 System.out.println("Вывести информацию о годовом отчёте.");

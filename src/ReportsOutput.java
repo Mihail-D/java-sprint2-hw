@@ -23,6 +23,35 @@ public class ReportsOutput {
             }
         }
 
+        System.out.println("Самые большие доходы по каждому месяцу составили:");
+
+        for (Integer i : profitableProducts.keySet()) {
+            int key = Integer.parseInt(profitableProducts.get(i).keyName.substring(0, 2));
+            System.out.print(menuOutput.months[key - 1] + ": ");
+            System.out.print(profitableProducts.get(i).itemName + " ");
+            System.out.println(profitableProducts.get(i).quantity * profitableProducts.get(i).sumOfOne + "руб.");
+        }
+
+    }
+
+    public void getMostExpensiveProduct() {
+
+        emptyStorageCheck();
+        profitableProductsReset();
+
+        for (String i : ReportsReader.monthFiles.keySet()) {
+            int key = Integer.parseInt(i.substring(0, 2));
+            MonthlyReport report = ReportsReader.monthFiles.get(i);
+            int reportMaxProfit = report.quantity * report.sumOfOne;
+
+            if (report.isExpense) {
+                if (reportMaxProfit > profitableProducts.get(key).sumOfOne * profitableProducts.get(key).quantity) {
+                    profitableProducts.put(key, report);
+                }
+            }
+        }
+
+        System.out.println();
         System.out.println("Самые большие траты по каждому месяцу составили:");
 
         for (Integer i : profitableProducts.keySet()) {
