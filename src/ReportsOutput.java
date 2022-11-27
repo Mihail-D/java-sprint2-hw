@@ -4,61 +4,37 @@ public class ReportsOutput {
 
     public static MenuOutput menuOutput = new MenuOutput();
 
-    public TreeMap<Integer, Integer> profitableProducts = new TreeMap<>();
+    public TreeMap<Integer, MonthlyReport> profitableProducts = new TreeMap<>();
 
     public void getMostProfitableProduct() {
 
         emptyStorageCheck();
         profitableProductsReset();
 
-        for (String i : ReportsReader.monthFiles.keySet()) { //01_4, 02_3, 03_2, 01_5, 02_4, 03_3, 01_2
+        for (String i : ReportsReader.monthFiles.keySet()) {
             int key = Integer.parseInt(i.substring(0, 2));
             MonthlyReport report = ReportsReader.monthFiles.get(i);
             int reportMaxProfit = report.quantity * report.sumOfOne;
 
             if (!report.isExpense) {
-                if (reportMaxProfit > profitableProducts.get(key)) {
-                    profitableProducts.put(key, reportMaxProfit);
+                if (reportMaxProfit > profitableProducts.get(key).sumOfOne * profitableProducts.get(key).quantity) {
+                    profitableProducts.put(key, report);
                 }
             }
         }
 
+        System.out.println("Самые большие траты по каждому месяцу составили:");
 
-
-
-
-
-        System.out.println(profitableProducts);  // TODO TODO TODO
-        System.out.println(ReportsReader.monthFiles.keySet()); // TODO TODO TODO
+        for (Integer i : profitableProducts.keySet()) {
+            int key = Integer.parseInt(profitableProducts.get(i).keyName.substring(0, 2));
+            System.out.print(menuOutput.months[key - 1] + ": ");
+            System.out.print(profitableProducts.get(i).itemName + " ");
+            System.out.println(profitableProducts.get(i).quantity * profitableProducts.get(i).sumOfOne + " руб. ");
+        }
 
     }
 
-
-/*    public void getMostExpensiveProduct() {
-
-        emptyStorageCheck();
-        profitableProductsReset();
-
-        for (String i : ReportsReader.monthFiles.keySet()) {
-            MonthlyReport report = ReportsReader.monthFiles.get(i);
-            int key = Integer.parseInt(i.substring(0, 2));
-
-            if (report.quantity * report.sumOfOne > profitableProducts.get(key)) {
-                profitableProducts.put(key, report.quantity * report.sumOfOne);
-                System.out.println(report.itemName); // TODO TODO TODO
-            }
-        }
-
-        System.out.println(profitableProducts);  // TODO TODO TODO
-
-    }*/
-
-
-
-
-
-
-    public void emptyStorageCheck(){
+    public void emptyStorageCheck() {
         if (ReportsReader.monthFiles.size() == 0 || ReportsReader.yearFile.size() == 0) {
             System.out.println("Месячные и годовой отчеты загружены, но не обработаны." + "\n");
             menuOutput.menuPrint();
@@ -67,9 +43,10 @@ public class ReportsOutput {
 
     public void profitableProductsReset() {
         profitableProducts.clear();
-
         for (int i = 0; i < ReportsReader.keysChunks.size(); i++) {
-            profitableProducts.put(ReportsReader.keysChunks.get(i), 0);
+            profitableProducts.put(ReportsReader.keysChunks.get(i), new MonthlyReport("itemName", true,
+                    1, 1, ""
+            ));
         }
     }
 }
