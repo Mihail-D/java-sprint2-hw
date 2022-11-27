@@ -34,7 +34,7 @@ public class ReportsReader {
                     if (!keyName.contains("_0")) {
                         fileData = strLine.split(",");
                         monthlyReport = new MonthlyReport(fileData[0], Boolean.parseBoolean(fileData[1]),
-                                Integer.parseInt(fileData[2]), Integer.parseInt(fileData[3])
+                                Integer.parseInt(fileData[2]), Integer.parseInt(fileData[3]), keyName
                         );
 
                         monthFiles.put(keyName, monthlyReport);
@@ -46,9 +46,9 @@ public class ReportsReader {
 
         getNamesChunks();
 
-        System.out.println("Отчет за " + menuOutput.months[keysChunks.get(0)-1] + " загружен.");
-        System.out.println("Отчет за " + menuOutput.months[keysChunks.get(1)-1] + " загружен.");
-        System.out.println("Отчет за " + menuOutput.months[keysChunks.get(2)-1] + " загружен.");
+        System.out.println("Отчет за " + menuOutput.months[keysChunks.get(0) - 1] + " загружен.");
+        System.out.println("Отчет за " + menuOutput.months[keysChunks.get(1) - 1] + " загружен.");
+        System.out.println("Отчет за " + menuOutput.months[keysChunks.get(2) - 1] + " загружен.");
         System.out.println("Месячные отчёты готовы к работе." + "\n");
 
         menuOutput.menuPrint();
