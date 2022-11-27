@@ -3,6 +3,9 @@ import java.util.HashMap;
 public class ReportsComparator {
 
     public MenuOutput menuOutput = new MenuOutput();
+    //ReportsReader reportsReader = new ReportsReader(); // TODO TODO TODO
+    //ReportsOutput reportsWriter = new ReportsOutput(); // TODO TODO TODO
+
 
     static HashMap<Integer, Integer> monthsBalanceStorage = new HashMap<>();
 

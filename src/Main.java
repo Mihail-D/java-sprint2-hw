@@ -5,9 +5,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        MenuOutput menuOutput = new MenuOutput(); // TODO TODO TODO СДЕЛАТЬ ЭКЗЕМПЛЯРАМИ КЛАССОВ
+        MenuOutput menuOutput = new MenuOutput();
         ReportsReader reportsReader = new ReportsReader();
-        ReportsWriter reportsWriter = new ReportsWriter();
+        ReportsOutput reportsWriter = new ReportsOutput();
         ReportsComparator reportsComparator = new ReportsComparator();
 
         menuOutput.greetingsMenu();
@@ -32,7 +32,7 @@ public class Main {
                 reportsComparator.getFineBalance();
             }
             else if (item == 4) {
-                reportsWriter.getMonthlyReports();
+                reportsWriter.getMostProfitableProduct();
                 System.out.println("Вывести информацию о всех месячных отчётах.");
             }
             else if (item == 5) {
