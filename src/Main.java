@@ -5,18 +5,19 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        MenuOutput menuPrint = new MenuOutput(); // TODO TODO TODO СДЕЛАТЬ ЭКЗЕМПЛЯРАМИ КЛАССОВ
+        MenuOutput menuOutput = new MenuOutput(); // TODO TODO TODO СДЕЛАТЬ ЭКЗЕМПЛЯРАМИ КЛАССОВ
         ReportsReader reportsReader = new ReportsReader();
         ReportsWriter reportsWriter = new ReportsWriter();
+        ReportsComparator reportsComparator = new ReportsComparator();
 
-        MenuOutput.greetingsMenu();
-        MenuOutput.menuPrint();
+        menuOutput.greetingsMenu();
+        menuOutput.menuPrint();
 
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
             int item = scanner.nextInt();
-            if (!menuPrint.menuValidator(item)) {
+            if (!menuOutput.menuValidator(item)) {
                 continue;
             }
 
@@ -27,8 +28,8 @@ public class Main {
                 reportsReader.rowYearDataReader();
             }
             else if (item == 3) {
-                ReportsComparator.getRowBalance();
-                ReportsComparator.getFineBalance();
+                reportsComparator.getRowBalance();
+                reportsComparator.getFineBalance();
             }
             else if (item == 4) {
                 reportsWriter.getMonthlyReports();

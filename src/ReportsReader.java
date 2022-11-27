@@ -3,12 +3,13 @@ import java.util.*;
 
 public class ReportsReader {
 
+    public MenuOutput menuOutput = new MenuOutput();
+
     public static HashMap<String, MonthlyReport> monthFiles = new HashMap<>();
     public static HashMap<String, AnnualReport> yearFile = new HashMap<>();
     public static ArrayList<Integer> keysChunks = new ArrayList<>();
 
     public void rowMonthsDataReader() throws IOException {
-        System.out.println("Считываю все месячные отчёты." + "\n");
 
         File folder = new File("./resources");
         File[] listOfFiles = folder.listFiles();
@@ -44,12 +45,17 @@ public class ReportsReader {
         }
 
         getNamesChunks();
-        System.out.println("Месячные отчёты загружены в систему и готовы к работе." + "\n");
-        MenuOutput.menuPrint();
+
+        System.out.println("Отчет за " + menuOutput.months[keysChunks.get(0)-1] + " загружен.");
+        System.out.println("Отчет за " + menuOutput.months[keysChunks.get(1)-1] + " загружен.");
+        System.out.println("Отчет за " + menuOutput.months[keysChunks.get(2)-1] + " загружен.");
+        System.out.println("Месячные отчёты готовы к работе." + "\n");
+
+        menuOutput.menuPrint();
     }
 
     public void rowYearDataReader() throws IOException {
-        System.out.println("Считываю годовой отчёт." + "\n");
+        System.out.println("Считываю годовой отчёт.");
 
         File folder = new File("./resources");
         File[] listOfFiles = folder.listFiles();
@@ -84,7 +90,7 @@ public class ReportsReader {
             }
         }
         System.out.println("Годовой отчет загружен в систему и готов к работе." + "\n");
-        MenuOutput.menuPrint();
+        menuOutput.menuPrint();
     }
 
     void getNamesChunks() {
@@ -95,9 +101,7 @@ public class ReportsReader {
                 keysChunks.add(keyChunk);
             }
         }
-
     }
-
 }
 
 

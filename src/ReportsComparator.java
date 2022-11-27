@@ -2,8 +2,11 @@ import java.util.HashMap;
 
 public class ReportsComparator {
 
+    public MenuOutput menuOutput = new MenuOutput();
+
     static HashMap<Integer, Integer> monthsBalanceStorage = new HashMap<>();
-    public static void getRowBalance() {
+
+    public void getRowBalance() {
 
         for (Integer j : ReportsReader.keysChunks) {
             monthsBalanceStorage.put(j, 0);
@@ -24,7 +27,7 @@ public class ReportsComparator {
         }
     }
 
-    public static void getFineBalance() {
+    public void getFineBalance() {
         System.out.println("Сверяю отчёты." + "\n");
         boolean isMatches;
         boolean withoutDiscrepancies = true;
@@ -53,7 +56,7 @@ public class ReportsComparator {
         if (withoutDiscrepancies) {
             if (ReportsReader.monthFiles.size() == 0 || ReportsReader.yearFile.size() == 0) {
                 System.out.println("Месячные и годовой отчеты загружены, но не обработаны." + "\n");
-                MenuOutput.menuPrint();
+                menuOutput.menuPrint();
             }
             else {
                 System.out.println("Сверка завершена. Расхождений не обнаружено.");
@@ -61,9 +64,9 @@ public class ReportsComparator {
         }
     }
 
-    public static void getReportDiscrepancy(int month, int globalBata, int localData) {
+    public void getReportDiscrepancy(int month, int globalBata, int localData) {
 
-        System.out.println("В отчетности за " + MenuOutput.months[month] + " обнаружено расхождение " +
+        System.out.println("В отчетности за " + menuOutput.months[month] + " обнаружено расхождение " +
                 "данных");
         System.out.println("Данные в годовом отчете: " + globalBata + "руб.");
         System.out.println("Данные в отчете за месяц: " + localData + "руб.");

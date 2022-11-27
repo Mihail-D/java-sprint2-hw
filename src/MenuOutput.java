@@ -1,13 +1,13 @@
 public class MenuOutput {
 
-    static String[] months = new String[]{"январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август",
+    String[] months = new String[]{"январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август",
             "сентябрь", "октябрь", "ноябрь", "декабрь"};
 
-    public static void greetingsMenu() {
+    public void greetingsMenu() {
         System.out.println("Вас приветствует программа финансовой отчетности.");
     }
 
-    public static void menuPrint() {
+    public void menuPrint() {
         System.out.println("Выберите Ваши дальнейшие действия." + "\n");
         System.out.println("1 - Считать все месячные отчёты.");
         System.out.println("2 - Считать годовой отчёт.");
