@@ -102,7 +102,7 @@ public class ReportsOutput {
             total += yearIncomesList.get(i).amount;
         }
 
-        System.out.println("Средние доходы составили " + (total / 12) + "руб. в месяц" + "\n");
+        System.out.println("Среднегодовые доходы составили " + (total / 12) + "руб. в месяц" + "\n");
     }
 
     public void getAnnualAverageExpenses() {
@@ -112,7 +112,7 @@ public class ReportsOutput {
             total += yearExpensesList.get(i).amount;
         }
 
-        System.out.println("Средние расходы составили " + (total / 12) + "руб. в месяц" + "\n");
+        System.out.println("Среднегодовые расходы составили " + (total / 12) + "руб. в месяц" + "\n");
     }
 
     public void getAnnualBalanceOut() {

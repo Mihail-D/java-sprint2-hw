@@ -47,7 +47,14 @@ public class ReportsComparator {
             }
             else {
                 index = report.month;
+
+                if (ReportsReader.monthFiles.size() == 0) {
+                    System.out.println("Введите значение меню '1' для обработки месячных отчетов.");
+                    return;
+                }
                 isMatches = report.amount == monthsBalanceStorage.get(index);
+
+
 
                 if (!isMatches) {
                     getReportDiscrepancy(index, report.amount, monthsBalanceStorage.get(index));
@@ -56,10 +63,14 @@ public class ReportsComparator {
             }
         }
         if (withoutDiscrepancies) {
-            if (ReportsReader.monthFiles.size() == 0 || ReportsReader.yearFile.size() == 0) {
-                System.out.println("Месячные и годовой отчеты загружены, но не обработаны." + "\n");
+            if (ReportsReader.monthFiles.size() == 0) {
+                System.out.println("Месячные отчеты загружены, но не обработаны." + "\n");
                 menuOutput.menuPrint();
             }
+            else if (ReportsReader.yearFile.size() == 0) {
+                System.out.println("Годовой отчет загружен, но не обработан." + "\n");
+            }
+
             else {
                 System.out.println("Сверка завершена. Расхождений не обнаружено.");
             }
