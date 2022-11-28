@@ -20,7 +20,7 @@ public class MenuOutput {
     public boolean menuValidator(int item) {
         boolean valid = true;
 
-        if (item < 0 || item > 5 ) {
+        if ((item < 0 || item > 5)) {
             System.out.println("Указаны неправильные значения. Введите от 1 до 5 или 0 для выхода.");
             valid = false;
         }

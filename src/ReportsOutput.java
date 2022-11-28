@@ -63,6 +63,10 @@ public class ReportsOutput {
 
     }
 
+    public void getAnnualReport() {
+
+    }
+
     public void emptyStorageCheck() {
         if (ReportsReader.monthFiles.size() == 0 || ReportsReader.yearFile.size() == 0) {
             System.out.println("Месячные и годовой отчеты загружены, но не обработаны." + "\n");

@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -16,7 +17,17 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            int item = scanner.nextInt();
+            int item = 0;
+            try {
+                item = scanner.nextInt();
+            }catch (InputMismatchException e) {
+                System.out.println("Invalid value!");
+                scanner.next();
+                continue;
+            }
+
+
+
             if (!menuOutput.menuValidator(item)) {
                 continue;
             }
