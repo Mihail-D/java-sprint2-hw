@@ -8,8 +8,9 @@ public class ReportsReader {
     public static HashMap<String, MonthlyReport> monthFiles = new HashMap<>();
     public static HashMap<String, AnnualReport> yearFile = new HashMap<>();
     public static ArrayList<Integer> keysChunks = new ArrayList<>();
-    public static String yearPointer = "";
+    public static String yearPointer = ""; // используется для вывода года в отчете ReportsOutput
 
+    // считывание из файлов месяцев и года с переводом строк данных в объекты
     public void rowMonthsDataReader() throws IOException {
 
         File folder = new File("./resources");
@@ -59,7 +60,7 @@ public class ReportsReader {
         menuOutput.menuPrint();
     }
 
-    public void rowYearDataReader() throws IOException {         // TODO TODO TODO
+    public void rowYearDataReader() throws IOException {
         System.out.println("Считываю годовой отчёт.");
 
         File folder = new File("./resources");
@@ -103,7 +104,7 @@ public class ReportsReader {
         System.out.println("Годовой отчет загружен в систему и готов к работе." + "\n");
         menuOutput.menuPrint();
     }
-
+    // сервисный класс для определения номеров месяцев, количества файлов в отчете и вормирования имен ключей
     void getNamesChunks() {
         int keyChunk;
         for (String i : monthFiles.keySet()) {

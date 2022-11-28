@@ -6,12 +6,12 @@ public class ReportsComparator {
     static HashMap<Integer, Integer> monthsBalanceStorage = new HashMap<>();
 
     public void getRowBalance() {
-
+// делаем структуру для будущего хранения данных по виду трат/доходов
         for (Integer j : ReportsReader.keysChunks) {
             monthsBalanceStorage.put(j, 0);
             monthsBalanceStorage.put(-j, 0);
         }
-
+// распределение по доходам или расходам
         for (String value : ReportsReader.monthFiles.keySet()) {
             MonthlyReport report = ReportsReader.monthFiles.get(value);
             int operationsSum = report.sumOfOne * report.quantity;
@@ -25,7 +25,7 @@ public class ReportsComparator {
             }
         }
     }
-
+// сверка отчетов и вывод разницы
     public void getFineBalance() {
         System.out.println("Сверяю отчёты." + "\n");
         boolean isMatches;
