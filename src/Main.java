@@ -47,6 +47,7 @@ public class Main {
                 reportsWriter.getMostExpensiveProduct();
             }
             else if (item == 5) {
+                reportsWriter.getAnnualReport();
                 System.out.println("Вывести информацию о годовом отчёте.");
             }
             else if (item == 0) {

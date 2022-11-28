@@ -46,9 +46,13 @@ public class ReportsReader {
 
         getNamesChunks();
 
-        System.out.println("Отчет за " + menuOutput.months[keysChunks.get(0) - 1] + " загружен.");
-        System.out.println("Отчет за " + menuOutput.months[keysChunks.get(1) - 1] + " загружен.");
-        System.out.println("Отчет за " + menuOutput.months[keysChunks.get(2) - 1] + " загружен.");
+        String monthsOfReport = "Загружены отчеты за ";
+
+        for (Integer keysChunk : keysChunks) {
+            monthsOfReport += menuOutput.months[keysChunk - 1] + " ";
+        }
+
+        System.out.println(monthsOfReport.trim() + ".");
         System.out.println("Месячные отчёты готовы к работе." + "\n");
 
         menuOutput.menuPrint();

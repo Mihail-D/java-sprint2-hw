@@ -24,7 +24,6 @@ public class ReportsOutput {
 
         if (ReportsReader.monthFiles.size() == 0) {
             System.out.println("Месячный отчет загружен, но не обработан.");
-            //menuOutput.menuPrint();
         }
         else {
             System.out.println("Самые большие доходы по каждому месяцу составили:" + "\n");
@@ -75,13 +74,13 @@ public class ReportsOutput {
 
     }
 
-    public void emptyStorageCheck() {
+/*    public void emptyStorageCheck() {
 
         if (ReportsReader.monthFiles.size() == 0 || ReportsReader.yearFile.size() == 0) {
             menuOutput.menuPrint();
         }
 
-    }
+    }*/
 
     public void profitableProductsReset() {
         profitableProducts.clear();
