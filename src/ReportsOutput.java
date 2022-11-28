@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.TreeMap;
 
 public class ReportsOutput {
@@ -5,6 +6,8 @@ public class ReportsOutput {
     public static MenuOutput menuOutput = new MenuOutput();
 
     public TreeMap<Integer, MonthlyReport> profitableProducts = new TreeMap<>();
+    public TreeMap<Integer, AnnualReport> yearExpensesList = new TreeMap<>();
+    public TreeMap<Integer, AnnualReport> yearIncomesList = new TreeMap<>();
 
     public void getMostProfitableProduct() {
 
@@ -70,17 +73,42 @@ public class ReportsOutput {
         }
     }
 
-    public void getAnnualReport() {
+    public void getAnnualReport() {     // TODO   Разнести по методам
+
+        HashMap<String, AnnualReport> report = ReportsReader.yearFile;
+        if (report.size() == 0) {
+            System.out.println("Годовой отчет загружен, но не обработан." + "\n");
+        }
+        else {
+            System.out.println("Отчет за " + ReportsReader.yearPointer + " год.");
+
+            for (String i : report.keySet()) {
+                if (report.get(i).isExpense) {
+                    yearExpensesList.put(report.get(i).month, report.get(i));
+                }
+                else {
+                    yearIncomesList.put(report.get(i).month, report.get(i));
+                }
+            }
+
+            for (Integer key : yearIncomesList.keySet()) {
+                int balance = yearIncomesList.get(key).amount - yearExpensesList.get(key).amount;
+                String month = menuOutput.months[yearIncomesList.get(key).month-1];
+                System.out.print("За " + month + " ");
+
+                if (balance > 0) {
+                    System.out.println("получен " + balance + "руб. доход.");
+                }
+                else {
+                    System.out.println("получены " + balance + "руб. убытки.");
+                }
+            }
+        }
+
 
     }
 
-/*    public void emptyStorageCheck() {
 
-        if (ReportsReader.monthFiles.size() == 0 || ReportsReader.yearFile.size() == 0) {
-            menuOutput.menuPrint();
-        }
-
-    }*/
 
     public void profitableProductsReset() {
         profitableProducts.clear();

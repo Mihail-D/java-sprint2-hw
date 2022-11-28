@@ -1,6 +1,6 @@
 public class MenuOutput {
 
-    String[] months = new String[]{"январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август",
+    public  String[] months = new String[]{"январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август",
             "сентябрь", "октябрь", "ноябрь", "декабрь"};
 
     public void greetingsMenu() {

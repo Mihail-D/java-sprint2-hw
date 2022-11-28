@@ -8,6 +8,7 @@ public class ReportsReader {
     public static HashMap<String, MonthlyReport> monthFiles = new HashMap<>();
     public static HashMap<String, AnnualReport> yearFile = new HashMap<>();
     public static ArrayList<Integer> keysChunks = new ArrayList<>();
+    public static String yearPointer = "";
 
     public void rowMonthsDataReader() throws IOException {
 
@@ -58,7 +59,7 @@ public class ReportsReader {
         menuOutput.menuPrint();
     }
 
-    public void rowYearDataReader() throws IOException {
+    public void rowYearDataReader() throws IOException {         // TODO TODO TODO
         System.out.println("Считываю годовой отчёт.");
 
         File folder = new File("./resources");
@@ -78,7 +79,13 @@ public class ReportsReader {
                 int keyNamePrefix = 0;
 
                 while ((strLine = br.readLine()) != null && strLine.length() != 0) {
-                    String keyName = fileName.substring(2, fileName.length() - 4) + "_" + keyNamePrefix;
+                    String yearPoint = fileName.substring(2, fileName.length() - 4);
+
+                    if (!yearPointer.contains(yearPoint)) {
+                        yearPointer += yearPoint;
+                    }
+
+                    String keyName = yearPoint + "_" + keyNamePrefix;
                     keyNamePrefix++;
 
                     if (!keyName.contains("_0")) {
