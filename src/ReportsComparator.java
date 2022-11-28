@@ -25,7 +25,7 @@ public class ReportsComparator {
             }
         }
     }
-// сверка отчетов и вывод разницы
+    // сверка отчетов и вывод разницы
     public void getFineBalance() {
         System.out.println("Сверяю отчёты." + "\n");
         boolean isMatches;
@@ -53,8 +53,6 @@ public class ReportsComparator {
                     return;
                 }
                 isMatches = report.amount == monthsBalanceStorage.get(index);
-
-
 
                 if (!isMatches) {
                     getReportDiscrepancy(index, report.amount, monthsBalanceStorage.get(index));
