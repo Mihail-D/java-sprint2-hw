@@ -3,13 +3,9 @@ import java.util.HashMap;
 public class ReportsComparator {
 
     public MenuOutput menuOutput = new MenuOutput();
-    public ReportsOutput reportsOutput = new ReportsOutput();
-
     static HashMap<Integer, Integer> monthsBalanceStorage = new HashMap<>();
 
     public void getRowBalance() {
-
-        reportsOutput.emptyStorageCheck();
 
         for (Integer j : ReportsReader.keysChunks) {
             monthsBalanceStorage.put(j, 0);

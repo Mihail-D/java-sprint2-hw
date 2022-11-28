@@ -18,15 +18,15 @@ public class Main {
 
         while (true) {
             int item = 0;
+
             try {
+                System.out.println("Введите значение меню.");
                 item = scanner.nextInt();
-            }catch (InputMismatchException e) {
-                System.out.println("Invalid value!");
+            } catch (InputMismatchException e) {
+                System.out.println("Введенные значения не являются числами.");
                 scanner.next();
                 continue;
             }
-
-
 
             if (!menuOutput.menuValidator(item)) {
                 continue;
