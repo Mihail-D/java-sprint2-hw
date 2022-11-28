@@ -17,7 +17,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            int item = 0;
+            int item;
 
             try {
                 System.out.println("Введите значение меню.");

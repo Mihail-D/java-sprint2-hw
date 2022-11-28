@@ -9,6 +9,8 @@ public class ReportsOutput {
     public TreeMap<Integer, AnnualReport> yearExpensesList = new TreeMap<>();
     public TreeMap<Integer, AnnualReport> yearIncomesList = new TreeMap<>();
 
+    HashMap<String, AnnualReport> report = ReportsReader.yearFile;
+
     public void getMostProfitableProduct() {
 
         profitableProductsReset();
@@ -75,40 +77,70 @@ public class ReportsOutput {
 
     public void getAnnualReport() {     // TODO   Разнести по методам
 
-        HashMap<String, AnnualReport> report = ReportsReader.yearFile;
         if (report.size() == 0) {
             System.out.println("Годовой отчет загружен, но не обработан." + "\n");
         }
         else {
             System.out.println("Отчет за " + ReportsReader.yearPointer + " год.");
 
-            for (String i : report.keySet()) {
-                if (report.get(i).isExpense) {
-                    yearExpensesList.put(report.get(i).month, report.get(i));
-                }
-                else {
-                    yearIncomesList.put(report.get(i).month, report.get(i));
-                }
-            }
+            getAnnualReportSplit();
 
-            for (Integer key : yearIncomesList.keySet()) {
-                int balance = yearIncomesList.get(key).amount - yearExpensesList.get(key).amount;
-                String month = menuOutput.months[yearIncomesList.get(key).month-1];
-                System.out.print("За " + month + " ");
+            getAnnualBalanceOut();
 
-                if (balance > 0) {
-                    System.out.println("получен " + balance + "руб. доход.");
-                }
-                else {
-                    System.out.println("получены " + balance + "руб. убытки.");
-                }
-            }
+            getAnnualAverageIncome();
+
+            getAnnualAverageExpenses();
+
         }
-
 
     }
 
+    public void getAnnualAverageIncome() {
+        int total = 0;
 
+        for (Integer i : yearIncomesList.keySet()) {
+            total += yearIncomesList.get(i).amount;
+        }
+
+        System.out.println("Средние доходы составили " + (total / 12) + "руб. в месяц" + "\n");
+    }
+
+    public void getAnnualAverageExpenses() {
+        int total = 0;
+
+        for (Integer i : yearExpensesList.keySet()) {
+            total += yearExpensesList.get(i).amount;
+        }
+
+        System.out.println("Средние расходы составили " + (total / 12) + "руб. в месяц" + "\n");
+    }
+
+    public void getAnnualBalanceOut() {
+        for (Integer key : yearIncomesList.keySet()) {
+            int balance = yearIncomesList.get(key).amount - yearExpensesList.get(key).amount;
+            String month = menuOutput.months[yearIncomesList.get(key).month - 1];
+            System.out.print("За " + month + " ");
+
+            if (balance > 0) {
+                System.out.println("получен " + balance + "руб. доход.");
+            }
+            else {
+                System.out.println("получены " + balance + "руб. убытки.");
+            }
+        }
+        System.out.println();
+    }
+
+    public void getAnnualReportSplit() {
+        for (String i : report.keySet()) {
+            if (report.get(i).isExpense) {
+                yearExpensesList.put(report.get(i).month, report.get(i));
+            }
+            else {
+                yearIncomesList.put(report.get(i).month, report.get(i));
+            }
+        }
+    }
 
     public void profitableProductsReset() {
         profitableProducts.clear();
