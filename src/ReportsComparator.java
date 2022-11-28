@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ReportsComparator {
@@ -13,14 +14,14 @@ public class ReportsComparator {
         }
 
         for (String value : ReportsReader.monthFiles.keySet()) {
-            int operationsSum =
-                    ReportsReader.monthFiles.get(value).sumOfOne * ReportsReader.monthFiles.get(value).quantity;
+            MonthlyReport report = ReportsReader.monthFiles.get(value);
+            int operationsSum = report.sumOfOne * report.quantity;
             int valueId = Integer.parseInt(value.substring(0, 2));
 
-            if (monthsBalanceStorage.containsKey(valueId) && ReportsReader.monthFiles.get(value).isExpense) {
+            if (monthsBalanceStorage.containsKey(valueId) && report.isExpense) {
                 monthsBalanceStorage.merge(-valueId, operationsSum, Integer::sum);
             }
-            else if (monthsBalanceStorage.containsKey(valueId) && !(ReportsReader.monthFiles.get(value).isExpense)) {
+            else if (monthsBalanceStorage.containsKey(valueId) && !(report.isExpense)) {
                 monthsBalanceStorage.merge(valueId, operationsSum, Integer::sum);
             }
         }
@@ -31,23 +32,26 @@ public class ReportsComparator {
         boolean isMatches;
         boolean withoutDiscrepancies = true;
         int index;
+
         for (String item : ReportsReader.yearFile.keySet()) {
-            if (ReportsReader.yearFile.get(item).isExpense) {
-                index = ReportsReader.yearFile.get(item).month;
-                isMatches = ReportsReader.yearFile.get(item).amount == monthsBalanceStorage.get(-index);
+            AnnualReport report = ReportsReader.yearFile.get(item);
+
+            if (report.isExpense) {
+                index = report.month;
+                isMatches = report.amount == monthsBalanceStorage.get(-index);
                 if (!isMatches) {
-                    getReportDiscrepancy(index, ReportsReader.yearFile.get(item).amount,
+                    getReportDiscrepancy(index, report.amount,
                             monthsBalanceStorage.get(-index)
                     );
                     withoutDiscrepancies = false;
                 }
             }
-            else if (!(ReportsReader.yearFile.get(item).isExpense)) {
-                index = ReportsReader.yearFile.get(item).month;
-                isMatches = ReportsReader.yearFile.get(item).amount == monthsBalanceStorage.get(index);
+            else {
+                index = report.month;
+                isMatches = report.amount == monthsBalanceStorage.get(index);
 
                 if (!isMatches) {
-                    getReportDiscrepancy(index, ReportsReader.yearFile.get(item).amount, monthsBalanceStorage.get(index));
+                    getReportDiscrepancy(index, report.amount, monthsBalanceStorage.get(index));
                     withoutDiscrepancies = false;
                 }
             }
