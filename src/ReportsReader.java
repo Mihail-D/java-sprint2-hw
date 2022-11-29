@@ -104,7 +104,7 @@ public class ReportsReader {
         System.out.println("Годовой отчет загружен в систему и готов к работе." + "\n");
         menuOutput.menuPrint();
     }
-    // сервисный класс для определения номеров месяцев, количества файлов в отчете и формирования имен ключей
+
     void getNamesChunks() {
         int keyChunk;
         for (String i : monthFiles.keySet()) {
