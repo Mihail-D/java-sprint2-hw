@@ -17,15 +17,13 @@ public class ReportsReader {
     public static final String path = "./resources/";
 
     public void rowMonthsDataReader() throws IOException {
-        if(!Files.exists(Path.of(path))){
+        if (!Files.exists(Path.of(path))) {
             System.out.println("Файл отсутствует. Укажите корректный путь к файлу." + "\n");
             return;
         }
 
         Set<String> filesList = getListFiles(path);
         MonthlyReport monthlyReport;
-
-
 
         for (String i : filesList) {
 
@@ -64,7 +62,7 @@ public class ReportsReader {
     }
 
     public void rowYearDataReader() throws IOException {
-        if(!Files.exists(Path.of(path))){
+        if (!Files.exists(Path.of(path))) {
             System.out.println("Файл отсутствует. Укажите корректный путь к файлу." + "\n");
             return;
         }
@@ -100,6 +98,7 @@ public class ReportsReader {
         getNamesChunks();
 
         System.out.println("Загружен отчет за " + yearPointer + " год.");
+        System.out.println("Годовой отчет готов к работе." + "\n");
     }
 
     void getNamesChunks() {

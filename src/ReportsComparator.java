@@ -27,7 +27,6 @@ public class ReportsComparator {
     }
     // сверка отчетов и вывод разницы
     public void getFineBalance() {
-        System.out.println("Сверяю отчёты." + "\n");
         boolean isMatches;
         boolean withoutDiscrepancies = true;
         int index;
@@ -49,7 +48,8 @@ public class ReportsComparator {
                 index = report.month;
 
                 if (ReportsReader.monthFiles.size() == 0) {
-                    System.out.println("Введите значение меню '1' для обработки месячных отчетов.");
+                    System.out.println("Для выполнения действий необходимы месячные отчеты.");
+                    System.out.println("Введите значение меню '1' для их обработки.");
                     return;
                 }
                 isMatches = report.amount == monthsBalanceStorage.get(index);
@@ -62,10 +62,12 @@ public class ReportsComparator {
         }
         if (withoutDiscrepancies) {
             if (ReportsReader.monthFiles.size() == 0) {
-                System.out.println("Месячные отчеты загружены, но не обработаны." + "\n");
+                System.out.println("Для выполнения действий необходимы месячные отчеты.");
+                System.out.println("Введите значение меню '1' для их обработки.");
             }
             else if (ReportsReader.yearFile.size() == 0) {
-                System.out.println("Годовой отчет загружен, но не обработан." + "\n");
+                System.out.println("Годовой отчет загружен, но не обработан.");
+                System.out.println("Введите значение меню '2' для его обработки." + "\n");
             }
 
             else {
@@ -81,6 +83,6 @@ public class ReportsComparator {
         System.out.println("Данные в годовом отчете: " + globalBata + "руб.");
         System.out.println("Данные в отчете за месяц: " + localData + "руб.");
         System.out.println("Разница составляет: " + (globalBata > localData ? globalBata - localData :
-                localData - globalBata) + "руб.");
+                localData - globalBata) + "руб." + "\n");
     }
 }

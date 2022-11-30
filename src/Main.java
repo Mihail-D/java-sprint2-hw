@@ -20,7 +20,6 @@ public class Main {
             int item;
 
             try {
-                //System.out.println("Сделайте выбор пункта меню.");
                 item = scanner.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Введенные значения не являются числами.");
