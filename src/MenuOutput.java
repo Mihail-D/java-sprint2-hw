@@ -5,10 +5,10 @@ public class MenuOutput {
 
     public void greetingsMenu() {
         System.out.println("Вас приветствует программа финансовой отчетности.");
+        System.out.println("Нажмите 6, если в процессе работы забудете значения меню." + "\n");
     }
 
     public void menuPrint() {
-        System.out.println("Выберите Ваши дальнейшие действия." + "\n");
         System.out.println("1 - Считать все месячные отчёты.");
         System.out.println("2 - Считать годовой отчёт.");
         System.out.println("3 - Сверить отчёты.");
@@ -20,7 +20,7 @@ public class MenuOutput {
     public boolean menuValidator(int item) {
         boolean valid = true;
 
-        if ((item < 0 || item > 5)) {
+        if ((item < 0 || item > 6)) {
             System.out.println("Указаны неправильные значения. Введите от 1 до 5 или 0 для выхода.");
             valid = false;
         }

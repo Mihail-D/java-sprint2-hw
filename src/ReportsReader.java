@@ -1,4 +1,6 @@
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -15,10 +17,18 @@ public class ReportsReader {
     public static final String path = "./resources/";
 
     public void rowMonthsDataReader() throws IOException {
+        if(!Files.exists(Path.of(path))){
+            System.out.println("Файл отсутствует. Укажите корректный путь к файлу." + "\n");
+            return;
+        }
+
         Set<String> filesList = getListFiles(path);
         MonthlyReport monthlyReport;
 
+
+
         for (String i : filesList) {
+
             if ((i.charAt(0) == 'm')) {
                 int keyNamePrefix = 0;
                 reader = new BufferedReader(new FileReader(path + i));
@@ -51,11 +61,14 @@ public class ReportsReader {
 
         System.out.println(monthsOfReport.trim() + ".");
         System.out.println("Месячные отчёты готовы к работе." + "\n");
-
-        menuOutput.menuPrint();
     }
 
     public void rowYearDataReader() throws IOException {
+        if(!Files.exists(Path.of(path))){
+            System.out.println("Файл отсутствует. Укажите корректный путь к файлу." + "\n");
+            return;
+        }
+
         Set<String> filesList = getListFiles(path);
         AnnualReport annualReport;
 

@@ -20,7 +20,7 @@ public class Main {
             int item;
 
             try {
-                System.out.println("Введите значение меню.");
+                //System.out.println("Сделайте выбор пункта меню.");
                 item = scanner.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Введенные значения не являются числами.");
@@ -48,6 +48,9 @@ public class Main {
             }
             else if (item == 5) {
                 reportsWriter.getAnnualReport();
+            }
+            else if (item == 6) {
+                menuOutput.menuPrint();
             }
             else if (item == 0) {
                 System.out.println("Выход.");

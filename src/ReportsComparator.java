@@ -63,7 +63,6 @@ public class ReportsComparator {
         if (withoutDiscrepancies) {
             if (ReportsReader.monthFiles.size() == 0) {
                 System.out.println("Месячные отчеты загружены, но не обработаны." + "\n");
-                menuOutput.menuPrint();
             }
             else if (ReportsReader.yearFile.size() == 0) {
                 System.out.println("Годовой отчет загружен, но не обработан." + "\n");
