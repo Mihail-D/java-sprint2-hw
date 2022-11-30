@@ -28,18 +28,18 @@ public class ReportsOutput {
         }
 
         if (ReportsReader.monthFiles.size() == 0) {
-            System.out.println("Месячный отчет загружен, но не обработан.");
-        }
-        else {
-            System.out.println("Самые большие доходы по каждому месяцу составили:" + "\n");
-            for (Integer i : profitableProducts.keySet()) {
-                int key = Integer.parseInt(profitableProducts.get(i).keyName.substring(0, 2));
-                System.out.print(menuOutput.months[key - 1] + ": ");
-                System.out.print(profitableProducts.get(i).itemName + " ");
-                System.out.println(profitableProducts.get(i).quantity * profitableProducts.get(i).sumOfOne + "руб.");
-            }
+            menuOutput.monthlyReportWarning();
+            return;
         }
 
+        System.out.println("Самые большие доходы по каждому месяцу составили:");
+
+        for (Integer i : profitableProducts.keySet()) {
+            int key = Integer.parseInt(profitableProducts.get(i).keyName.substring(0, 2));
+            System.out.print(menuOutput.months[key - 1] + ": ");
+            System.out.print(profitableProducts.get(i).itemName + " ");
+            System.out.println(profitableProducts.get(i).quantity * profitableProducts.get(i).sumOfOne + "руб.");
+        }
     }
 
     public void getMostExpensiveProduct() {
@@ -59,9 +59,8 @@ public class ReportsOutput {
         }
 
         if (ReportsReader.yearFile.size() == 0) {
-            System.out.println("Годовой отчет загружен, но не обработан." + "\n");
+            return;
         }
-        else {
 
             System.out.println();
             System.out.println("Самые большие траты по каждому месяцу составили:");
@@ -72,13 +71,14 @@ public class ReportsOutput {
                 System.out.print(profitableProducts.get(i).itemName + " ");
                 System.out.println(profitableProducts.get(i).quantity * profitableProducts.get(i).sumOfOne + " руб. ");
             }
-        }
+            System.out.println();
+
     }
 
     public void getAnnualReport() {
 
         if (report.size() == 0) {
-            System.out.println("Годовой отчет загружен, но не обработан." + "\n");
+            menuOutput.yearReportWarning();
         }
         else {
             System.out.println("Отчет за " + ReportsReader.yearPointer + " год.");
@@ -90,7 +90,6 @@ public class ReportsOutput {
             getAnnualAverageIncome();
 
             getAnnualAverageExpenses();
-
         }
     }
 
@@ -101,7 +100,7 @@ public class ReportsOutput {
             total += yearIncomesList.get(i).amount;
         }
 
-        System.out.println("Среднегодовые доходы составили " + (total / 12) + "руб. в месяц" + "\n");
+        System.out.println("Среднегодовые доходы составили " + (total / 12) + "руб. в месяц.");
     }
 
     public void getAnnualAverageExpenses() {
@@ -111,7 +110,7 @@ public class ReportsOutput {
             total += yearExpensesList.get(i).amount;
         }
 
-        System.out.println("Среднегодовые расходы составили " + (total / 12) + "руб. в месяц" + "\n");
+        System.out.println("Среднегодовые расходы составили " + (total / 12) + "руб. в месяц." + "\n");
     }
 
     public void getAnnualBalanceOut() {
@@ -121,15 +120,15 @@ public class ReportsOutput {
             System.out.print("За " + month + " ");
 
             if (balance > 0) {
-                System.out.println("получено " + balance + "руб. доход.");
+                System.out.println("получено " + balance + "руб. в виде доходов.");
             }
             else {
-                System.out.println("получены " + balance + "руб. убытки.");
+                System.out.println("получены " + balance + "руб. в виде убытков.");
             }
         }
         System.out.println();
     }
-    //разделение по доходам и расходам в симметричные коллекции для расчетов
+
     public void getAnnualReportSplit() {
         for (String i : report.keySet()) {
             if (report.get(i).isExpense) {
@@ -140,7 +139,7 @@ public class ReportsOutput {
             }
         }
     }
-    // сброс данных коллекции при временных расчетах
+
     public void profitableProductsReset() {
         profitableProducts.clear();
         for (int i = 0; i < ReportsReader.keysChunks.size(); i++) {

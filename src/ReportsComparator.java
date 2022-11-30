@@ -6,12 +6,10 @@ public class ReportsComparator {
     static HashMap<Integer, Integer> monthsBalanceStorage = new HashMap<>();
 
     public void getRowBalance() {
-// делаем структуру для будущего хранения данных по виду трат/доходов
         for (Integer j : ReportsReader.keysChunks) {
             monthsBalanceStorage.put(j, 0);
             monthsBalanceStorage.put(-j, 0);
         }
-// распределение по доходам или расходам
         for (String value : ReportsReader.monthFiles.keySet()) {
             MonthlyReport report = ReportsReader.monthFiles.get(value);
             int operationsSum = report.sumOfOne * report.quantity;
@@ -25,9 +23,7 @@ public class ReportsComparator {
             }
         }
     }
-    // сверка отчетов и вывод разницы
     public void getFineBalance() {
-        System.out.println("Сверяю отчёты." + "\n");
         boolean isMatches;
         boolean withoutDiscrepancies = true;
         int index;
@@ -49,7 +45,7 @@ public class ReportsComparator {
                 index = report.month;
 
                 if (ReportsReader.monthFiles.size() == 0) {
-                    System.out.println("Введите значение меню '1' для обработки месячных отчетов.");
+                    menuOutput.monthlyReportWarning();
                     return;
                 }
                 isMatches = report.amount == monthsBalanceStorage.get(index);
@@ -62,11 +58,10 @@ public class ReportsComparator {
         }
         if (withoutDiscrepancies) {
             if (ReportsReader.monthFiles.size() == 0) {
-                System.out.println("Месячные отчеты загружены, но не обработаны." + "\n");
-                menuOutput.menuPrint();
+                menuOutput.monthlyReportWarning();
             }
             else if (ReportsReader.yearFile.size() == 0) {
-                System.out.println("Годовой отчет загружен, но не обработан." + "\n");
+                menuOutput.yearReportWarning();
             }
 
             else {
@@ -82,6 +77,6 @@ public class ReportsComparator {
         System.out.println("Данные в годовом отчете: " + globalBata + "руб.");
         System.out.println("Данные в отчете за месяц: " + localData + "руб.");
         System.out.println("Разница составляет: " + (globalBata > localData ? globalBata - localData :
-                localData - globalBata) + "руб.");
+                localData - globalBata) + "руб." + "\n");
     }
 }
