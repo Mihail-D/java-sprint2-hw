@@ -86,7 +86,6 @@ public class ReportsReader {
                         String[] fileData = line.split(",");
                         annualReport = new AnnualReport(Integer.parseInt(fileData[0]), Integer.parseInt(fileData[1]),
                                 Boolean.parseBoolean(fileData[2])
-
                         );
 
                         yearFile.put(keyName, annualReport);

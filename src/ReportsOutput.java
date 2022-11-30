@@ -90,7 +90,6 @@ public class ReportsOutput {
             getAnnualAverageIncome();
 
             getAnnualAverageExpenses();
-
         }
     }
 
@@ -129,7 +128,7 @@ public class ReportsOutput {
         }
         System.out.println();
     }
-    //разделение по доходам и расходам в симметричные коллекции для расчетов
+
     public void getAnnualReportSplit() {
         for (String i : report.keySet()) {
             if (report.get(i).isExpense) {
@@ -140,7 +139,7 @@ public class ReportsOutput {
             }
         }
     }
-    // сброс данных коллекции при временных расчетах
+
     public void profitableProductsReset() {
         profitableProducts.clear();
         for (int i = 0; i < ReportsReader.keysChunks.size(); i++) {
