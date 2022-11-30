@@ -1,9 +1,9 @@
 public class MonthlyReport {
     String itemName;
-    String keyName;
     boolean isExpense;
     int quantity;
     int sumOfOne;
+    String keyName;
 
     public MonthlyReport(String itemName, boolean isExpense, int quantity, int sumOfOne, String keyName) {
         this.itemName = itemName;

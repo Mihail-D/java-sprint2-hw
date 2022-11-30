@@ -1,5 +1,7 @@
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ReportsReader {
 
@@ -8,33 +10,27 @@ public class ReportsReader {
     public static HashMap<String, MonthlyReport> monthFiles = new HashMap<>();
     public static HashMap<String, AnnualReport> yearFile = new HashMap<>();
     public static ArrayList<Integer> keysChunks = new ArrayList<>();
-    public static String yearPointer = ""; // используется для вывода года в отчете ReportsOutput
+    public static String yearPointer = "";
+    BufferedReader reader;
+    public static final String path = "./resources/";
 
-    // считывание из файлов месяцев и года с переводом строк данных в объекты
     public void rowMonthsDataReader() throws IOException {
-
-        File folder = new File("./resources");
-        File[] listOfFiles = folder.listFiles();
-        String fileName;
-        String[] fileData;
+        Set<String> filesList = getListFiles(path);
         MonthlyReport monthlyReport;
 
-        for (int i = 0; i < Objects.requireNonNull(listOfFiles).length; i++) {
-
-            if (listOfFiles[i].isFile() && listOfFiles[i].getName().charAt(0) == 'm') {
-
-                FileInputStream fis = new FileInputStream(listOfFiles[i]);
-                BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-                fileName = listOfFiles[i].getName();
-                String strLine;
+        for (String i : filesList) {
+            if ((i.charAt(0) == 'm')) {
                 int keyNamePrefix = 0;
+                reader = new BufferedReader(new FileReader(path + i));
+                String line = " ";
 
-                while ((strLine = br.readLine()) != null && strLine.length() != 0) {
-                    String keyName = fileName.substring(6, fileName.length() - 4) + "_" + keyNamePrefix;
+                while (reader.ready()) {
+                    line = reader.readLine();
+                    String keyName = i.substring(6, i.length() - 4) + "_" + keyNamePrefix;
                     keyNamePrefix++;
 
                     if (!keyName.contains("_0")) {
-                        fileData = strLine.split(",");
+                        String[] fileData = line.split(",");
                         monthlyReport = new MonthlyReport(fileData[0], Boolean.parseBoolean(fileData[1]),
                                 Integer.parseInt(fileData[2]), Integer.parseInt(fileData[3]), keyName
                         );
@@ -42,10 +38,9 @@ public class ReportsReader {
                         monthFiles.put(keyName, monthlyReport);
                     }
                 }
-                fis.close();
+                reader.close();
             }
         }
-
         getNamesChunks();
 
         String monthsOfReport = "Загружены отчеты за ";
@@ -114,6 +109,11 @@ public class ReportsReader {
             }
         }
     }
+
+    public Set<String> getListFiles(String dir) {
+        return Stream.of(Objects.requireNonNull(new File(dir).listFiles()))
+                .filter(file -> !file.isDirectory())
+                .map(File::getName)
+                .collect(Collectors.toSet());
+    }
 }
-
-
