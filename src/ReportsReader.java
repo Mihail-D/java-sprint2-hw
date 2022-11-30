@@ -22,7 +22,7 @@ public class ReportsReader {
             if ((i.charAt(0) == 'm')) {
                 int keyNamePrefix = 0;
                 reader = new BufferedReader(new FileReader(path + i));
-                String line = " ";
+                String line;
 
                 while (reader.ready()) {
                     line = reader.readLine();
@@ -56,48 +56,37 @@ public class ReportsReader {
     }
 
     public void rowYearDataReader() throws IOException {
-        System.out.println("Считываю годовой отчёт.");
-
-        File folder = new File("./resources");
-        File[] listOfFiles = folder.listFiles();
-        String fileName;
-        String[] fileData;
+        Set<String> filesList = getListFiles(path);
         AnnualReport annualReport;
 
-        for (int i = 0; i < Objects.requireNonNull(listOfFiles).length; i++) {
-
-            if (listOfFiles[i].isFile() && listOfFiles[i].getName().charAt(0) == 'y') {
-
-                FileInputStream fis = new FileInputStream(listOfFiles[i]);
-                BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-                fileName = listOfFiles[i].getName();
-                String strLine;
+        for (String i : filesList) {
+            if ((i.charAt(0) == 'y')) {
                 int keyNamePrefix = 0;
+                reader = new BufferedReader(new FileReader(path + i));
+                yearPointer = i.substring(2, i.length() - 4);
+                String line;
 
-                while ((strLine = br.readLine()) != null && strLine.length() != 0) {
-                    String yearPoint = fileName.substring(2, fileName.length() - 4);
-
-                    if (!yearPointer.contains(yearPoint)) {
-                        yearPointer += yearPoint;
-                    }
-
-                    String keyName = yearPoint + "_" + keyNamePrefix;
+                while (reader.ready()) {
+                    line = reader.readLine();
+                    String keyName = yearPointer + "_" + keyNamePrefix;
                     keyNamePrefix++;
 
                     if (!keyName.contains("_0")) {
-                        fileData = strLine.split(",");
+                        String[] fileData = line.split(",");
                         annualReport = new AnnualReport(Integer.parseInt(fileData[0]), Integer.parseInt(fileData[1]),
                                 Boolean.parseBoolean(fileData[2])
 
                         );
+
                         yearFile.put(keyName, annualReport);
                     }
                 }
-                fis.close();
+                reader.close();
             }
         }
-        System.out.println("Годовой отчет загружен в систему и готов к работе." + "\n");
-        menuOutput.menuPrint();
+        getNamesChunks();
+
+        System.out.println("Загружен отчет за " + yearPointer + " год.");
     }
 
     void getNamesChunks() {
