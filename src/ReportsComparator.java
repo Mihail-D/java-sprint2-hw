@@ -48,8 +48,7 @@ public class ReportsComparator {
                 index = report.month;
 
                 if (ReportsReader.monthFiles.size() == 0) {
-                    System.out.println("Для выполнения действий необходимы месячные отчеты.");
-                    System.out.println("Введите значение меню '1' для их обработки.");
+                    menuOutput.monthlyReportWarning();
                     return;
                 }
                 isMatches = report.amount == monthsBalanceStorage.get(index);
@@ -62,12 +61,10 @@ public class ReportsComparator {
         }
         if (withoutDiscrepancies) {
             if (ReportsReader.monthFiles.size() == 0) {
-                System.out.println("Для выполнения действий необходимы месячные отчеты.");
-                System.out.println("Введите значение меню '1' для их обработки.");
+                menuOutput.monthlyReportWarning();
             }
             else if (ReportsReader.yearFile.size() == 0) {
-                System.out.println("Годовой отчет загружен, но не обработан.");
-                System.out.println("Введите значение меню '2' для его обработки." + "\n");
+                menuOutput.yearReportWarning();
             }
 
             else {

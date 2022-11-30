@@ -26,4 +26,14 @@ public class MenuOutput {
         }
         return valid;
     }
+
+    public void monthlyReportWarning () {
+        System.out.println("Для выполнения действий необходимы месячные отчеты.");
+        System.out.println("Введите значение меню '1' для их обработки.");
+    }
+
+    public void yearReportWarning () {
+        System.out.println("Годовой отчет загружен, но не обработан.");
+        System.out.println("Введите значение меню '2' для его обработки." + "\n");
+    }
 }
