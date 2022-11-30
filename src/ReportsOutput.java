@@ -60,9 +60,8 @@ public class ReportsOutput {
         }
 
         if (ReportsReader.yearFile.size() == 0) {
-            System.out.println("Годовой отчет загружен, но не обработан." + "\n");
+            return;
         }
-        else {
 
             System.out.println();
             System.out.println("Самые большие траты по каждому месяцу составили:");
@@ -74,7 +73,7 @@ public class ReportsOutput {
                 System.out.println(profitableProducts.get(i).quantity * profitableProducts.get(i).sumOfOne + " руб. ");
             }
             System.out.println();
-        }
+
     }
 
     public void getAnnualReport() {
